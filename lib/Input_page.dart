@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
 import 'constants.dart';
+import 'round_icon_button.dart';
 
 enum EnumGender { Male, Female }
 
@@ -13,6 +14,7 @@ class InputPage extends StatefulWidget {
 
 int height = 180;
 int weight = 60;
+int age = 20;
 EnumGender selectedGender;
 
 class _InputPageState extends State<InputPage> {
@@ -117,24 +119,69 @@ class _InputPageState extends State<InputPage> {
                             weight.toString(),
                             style: kNumberStyle,
                           ),
-                          SizedBox(
-                            height: 40.0,
-                            width: 40.0,
-                            child: FloatingActionButton(
-                              backgroundColor: Color(0xFF4C4F5E),
-                              child: Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Expanded(
+                                  child: RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: () => setState(() {
+                                      weight--;
+                                      if (weight < 0) {
+                                        weight = 0;
+                                      }
+                                    }),
+                              )),
+                              Expanded(
+                                  child: RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPressed: () => setState(() {
+                                      weight++;
+                                    }),
+                              ))
+                            ],
+                          ),
                         ],
                       )),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    colour: kactiveCardColor,
-                  ),
+                      colour: kactiveCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "AGE",
+                            style: klabelTextStyle,
+                          ),
+                          Text(
+                            age.toString(),
+                            style: kNumberStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Expanded(
+                                  child: RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: () => setState(() {
+                                      age--;
+                                      if (age < 1) {
+                                        age = 1;
+                                      }
+                                    }),
+                              )),
+                              Expanded(
+                                  child: RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPressed: () => setState(() {
+                                      age++;
+                                    }),
+                              ))
+                            ],
+                          ),
+                        ],
+                      )),
                 ),
               ],
             )),
